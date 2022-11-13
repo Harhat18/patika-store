@@ -1,20 +1,49 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  FlatList,
+  ScrollView,
+} from "react-native";
+import product_data from "./src/product_data.json";
+import ProductCard from "./src/components/productCards/ProductCards";
 
-export default function App() {
+const App = () => {
+  const renderProducts = ({ item }) => <ProductCard products={item} />;
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Text style={styles.headerText}>PATIKASTORE</Text>
+      <TextInput style={styles.textInput} placeholder="  Ara..." />
+      <FlatList
+        numColumns={2}
+        data={product_data}
+        renderItem={renderProducts}
+      />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  },
+
+  headerText: {
+    fontSize: 30,
+    fontWeight: "bold",
+    color: "purple",
+    marginLeft: 10,
+    marginTop: 10,
+  },
+
+  textInput: {
+    backgroundColor: "#eceff1",
+    margin: 10,
+    borderRadius: 10,
   },
 });
+
+export default App;
